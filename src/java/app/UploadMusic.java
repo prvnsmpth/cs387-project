@@ -86,8 +86,6 @@ public class UploadMusic extends HttpServlet {
                     boolean isInMemory = item.isInMemory();
                     long sizeInBytes = item.getSize();
                     
-                    System.out.println("Size: " + sizeInBytes);
-                    
                     File path = new File(savePath + "/music");
                     if (!path.exists()) {
                         boolean status = path.mkdirs();                        
