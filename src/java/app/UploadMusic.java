@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.*;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
@@ -58,8 +57,7 @@ public class UploadMusic extends HttpServlet {
                 }
             }
             //String songName = request.getParameter("songName").toString();
-            //String songArtist = request.getParameter("songArtist").toString();
-            System.out.println("Hello");
+            //String songArtist = request.getParameter("songArtist").toString();            
             
         } finally {            
             out.close();
@@ -124,12 +122,7 @@ public class UploadMusic extends HttpServlet {
                 String album = (String) properties.get("album");
                 String genre = (String) properties.get("genre");
                 int length = getDurationWithMp3Spi(f);
-                
-                /*String key = "author";
-                String val = (String) properties.get(key);
-                System.out.println(val);
-                key = "mp3.id3tag.v2";
-                InputStream tag= (InputStream) properties.get(key);*/
+                                
             }
             
             // TAudioFormat properties
@@ -137,6 +130,7 @@ public class UploadMusic extends HttpServlet {
                 Map properties = ((TAudioFormat)baseFormat).properties();
                 String key = "bitrate";
                 Integer val = (Integer) properties.get(key);
+                                
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

@@ -1,0 +1,95 @@
+/* 
+    Document   : global
+    Created on : 18 Oct, 2012, 2:46:25 PM
+    Author     : praveen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+* {
+    font-family: Arial, sans-serif;
+}
+
+form td {
+    padding: 5px
+}
+
+input[type="text"], input[type="password"] {
+    padding: 7px;
+    border: 1px solid #777; width: 150px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;    
+}
+
+input[type="text"]:hover, input[type="password"]:hover {
+    -webkit-box-shadow: 0 1px 5px #999 inset;
+    -moz-box-shadow:  inset 0 1px 5px #999;
+    box-shadow: 0 1px 5px #999 inset; 
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    -webkit-box-shadow: 0 1px 5px #999 inset;
+    -moz-box-shadow:  inset 0 1px 5px #999;
+    box-shadow: 0 1px 5px #999 inset;
+    border: 1px solid #21BDDF; 
+}
+
+input[type="submit"], input[type="button"] {
+    color: #64D1E9;
+    background: #191919;
+    border: 1px solid #222;
+    padding: 7px 20px;     
+    background-image: -webkit-linear-gradient(top, #585858, #424242);
+    background-image: -webkit-gradient(top, #585858, #424242);
+    background-image: -moz-linear-gradient(top, #585858, #424242);
+    background-image: -ms-linear-gradient(top, #585858, #424242);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 0px rgba(0,0,0,.2);
+	box-shadow: 0 1px 0px rgba(0,0,0,.2);         
+}
+
+input[type="submit"]:disabled, input[type="button"]:disabled {
+    color: #444;
+    background: #888;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;  
+}
+
+input[type="submit"]:disabled:hover, input[type="button"]:disabled:hover {
+    background: #888;
+}
+
+input[type="submit"]:disabled:active, input[type="button"]:disabled:active {
+    color: #444;
+    background: #888;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+    background: #090909;
+    background-image: -webkit-linear-gradient(top, #4f4f4f, #3e3e3e);
+    background-image: -webkit-gradient(top, #4f4f4f, #3e3e3e);
+    background-image: -moz-linear-gradient(top, #4f4f4f, #3e3e3e);
+    background-image: -ms-linear-gradient(top, #4f4f4f, #3e3e3e);
+    -webkit-box-shadow: 0 1px 1px #131313; 
+    -moz-box-shadow: 0 1px 1px #131313; 
+    box-shadow: 0 1px 1px #131313;  
+}
+
+input[type="submit"]:active, input[type="button"]:active {
+    color: #21BDDF;
+    background-image: -webkit-linear-gradient(top, #3e3e3e, #4f4f4f);
+    background-image: -webkit-gradient(top, #3e3e3e, #4f4f4f);
+    background-image: -moz-linear-gradient(top, #3e3e3e, #4f4f4f);
+    background-image: -ms-linear-gradient(top, #3e3e3e, #4f4f4f);
+    -webkit-box-shadow: 0 1px 1px #131313; 
+    -moz-box-shadow: 0 1px 1px #131313; 
+    box-shadow: 0 1px 1px #131313;  
+}
+
