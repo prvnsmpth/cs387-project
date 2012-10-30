@@ -27,9 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserInfo", urlPatterns = {"/UserInfo"})
 public class UserInfo extends HttpServlet {
     
-    private static final String DBNAME = "cs387-project-db";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "123";
     private static final String USER_QUERY = "select name from user where username = ?;";
     private static final String UPLOAD_QUERY = "select song.song_id as song_id, song.title as song_title, song.album_id as album_id, song.upload_time as upload_time, album.title as album_title, album.artist_id as artist_id, artist.name as artist_name from song left join album on song.album_id = album.album_id left join artist on album.artist_id = artist.artist_id where song.uploaded_by = ? order by upload_time desc;";
     private static final String DOWNLOAD_QUERY = "select song.song_id as song_id, song.title as song_title, song.album_id as album_id, album.title as album_title, album.artist_id as artist_id, artist.name as artist_name, download.time as download_time from download left join song on download.song_id = song.song_id left join album on song.album_id = album.album_id left join artist on album.artist_id = artist.artist_id where download.username = ? order by download_time desc;";    
@@ -87,11 +84,11 @@ public class UserInfo extends HttpServlet {
                     info.put("song_id", rs2.getString("song_id"));
                     info.put("song_title", rs2.getString("song_title"));
                     info.put("album_id", rs2.getString("album_id"));
-                    info.put("upload_time ", rs2.getString("upload_time"));
-                    info.put("album_title ", rs2.getString("album_title"));
+                    info.put("upload_time", rs2.getString("upload_time"));
+                    info.put("album_title", rs2.getString("album_title"));
                     info.put("artist_id", rs2.getString("artist_id"));
                     info.put("artist_name", rs2.getString("artist_name"));
-                    uploadedSongData.add(info);
+                    uploadedSongData.add(info);                    
                 }
                 PreparedStatement prepStmt3 = con.prepareStatement(DOWNLOAD_QUERY);
                 prepStmt3.setString(1, strUsername);
@@ -103,8 +100,8 @@ public class UserInfo extends HttpServlet {
                     info.put("song_id", rs2.getString("song_id"));
                     info.put("song_title", rs2.getString("song_title"));
                     info.put("album_id", rs2.getString("album_id"));
-                    info.put("upload_time ", rs2.getString("download_time"));
-                    info.put("album_title ", rs2.getString("album_title"));
+                    info.put("upload_time", rs2.getString("download_time"));
+                    info.put("album_title", rs2.getString("album_title"));
                     info.put("artist_id", rs2.getString("artist_id"));
                     info.put("artist_name", rs2.getString("artist_name"));
                     
