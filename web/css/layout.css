@@ -1,0 +1,30 @@
+/* 
+    Document   : layout
+    Created on : 30 Oct, 2012, 5:38:44 PM
+    Author     : praveen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.section {
+    border: 1px solid #000;                
+    margin: 5px;
+} 
+.sec_header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff; background: #000; padding: 10px
+}
+.sec_content {
+    padding: 10px
+}
+table td {
+    padding: 5px;    
+}
+table thead {
+    padding: 5px;
+    background: #aaa;
+    color: #fff;
+    font-weight: bold
+}
+
