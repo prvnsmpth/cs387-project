@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,8 +26,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AlbumInfo", urlPatterns = {"/AlbumInfo"})
 public class AlbumInfo extends HttpServlet {
     
-    private static final String ALBUM_QUERY = "select * from album where album_id = ?;";
-    private static final String SONG_QUERY = "select * from song where album_id = ?;";
+    private static final String ALBUM_QUERY = "select a.*, ar.rating as user_rating from album as a "
+            + "left join album_rating as ar on a.album_id = ar.album_id and username = ? "
+            + "where a.album_id = ?;";
+    private static final String SONG_QUERY = "select "
+            + "s.*, sr.rating as user_rating "
+            + " from song as s "
+            + "left join song_rating as sr on s.song_id = sr.song_id and sr.username = ? "
+            + " where album_id = ?;";
     private static final String ARTIST_QUERY = "select name from artist where artist_id = ?;";
     private static final String REVIEWS_QUERY = "select * from album_review where album_id = ?;";
 
@@ -49,7 +56,13 @@ public class AlbumInfo extends HttpServlet {
              * TODO output your page here. You may use following sample code.
              */
             
-            String strAlbum_id = request.getParameter("album_id").toString();
+            String strAlbum_id = request.getParameter("album_id").toString();            
+            HttpSession session = request.getSession();
+            Object u = session.getAttribute("username");
+            String username = null;
+            if (u != null) {
+                username = u.toString(); 
+            }
             Database d = new Database();
             d.connect();
             Connection con = d.getConnection();
@@ -61,22 +74,26 @@ public class AlbumInfo extends HttpServlet {
 
             try {
                 PreparedStatement prepStmt1 = con.prepareStatement(ALBUM_QUERY);
-                prepStmt1.setString(1, strAlbum_id);
+                prepStmt1.setString(1, username);
+                prepStmt1.setString(2, strAlbum_id);
                 ResultSet rs1 = prepStmt1.executeQuery();
                 albumInfo = new HashMap<String, String>();
                 if(rs1.next()) {
                     albumInfo.put("id", rs1.getString("album_id"));
                     albumInfo.put("title", rs1.getString("title"));
+                    albumInfo.put("year", rs1.getString("year"));
                     albumInfo.put("artist_id", rs1.getString("artist_id"));
                     albumInfo.put("rating_count", rs1.getString("rating_count"));
                     albumInfo.put("rating", rs1.getString("rating"));
+                    albumInfo.put("user_rating", rs1.getString("user_rating"));
                     
                     // put artist_id in int to get artist name
                     artist_id = rs1.getInt("artist_id");
                 }
                 
-                PreparedStatement prepStmt2 = con.prepareStatement(SONG_QUERY);
-                prepStmt2.setString(1, strAlbum_id);
+                PreparedStatement prepStmt2 = con.prepareStatement(SONG_QUERY);                
+                prepStmt2.setString(1, username);
+                prepStmt2.setString(2, strAlbum_id);
                 ResultSet rs2 = prepStmt2.executeQuery();
                 System.out.println("Query executed!");
                 songListing = new ArrayList<Map<String, String>>();
@@ -85,13 +102,15 @@ public class AlbumInfo extends HttpServlet {
                     songInfo.put("song_id", rs2.getString("song_id"));
                     songInfo.put("title", rs2.getString("title"));
                     String length = rs2.getString("length");
-                    songInfo.put("length", rs2.getString("length"));
+                    String[] p = length.split(":", 2);
+                    songInfo.put("length", p[1]);
                     songInfo.put("downloads", rs2.getString("downloads"));
                     songInfo.put("rating", rs2.getString("rating"));
                     songInfo.put("genre", rs2.getString("genre"));
                     songInfo.put("uploaded_by", rs2.getString("uploaded_by"));
                     songInfo.put("upload_time", rs2.getString("upload_time"));
                     songInfo.put("rating_count", rs2.getString("rating_count"));
+                    songInfo.put("user_rating", rs2.getString("user_rating"));
                     
                     songListing.add(songInfo);
                 }
@@ -125,6 +144,7 @@ public class AlbumInfo extends HttpServlet {
             } 
             catch(Exception e) {
                 System.out.println("search_users: Error while searching users: "+e.getMessage());
+                e.printStackTrace();
             }
             finally {
                 try {

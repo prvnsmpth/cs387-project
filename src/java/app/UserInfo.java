@@ -97,13 +97,13 @@ public class UserInfo extends HttpServlet {
                 downloadedSongData = new ArrayList<Map <String, String>>();
                 while(rs3.next()) {
                     Map<String, String> info = new HashMap<String, String>();                    
-                    info.put("song_id", rs2.getString("song_id"));
-                    info.put("song_title", rs2.getString("song_title"));
-                    info.put("album_id", rs2.getString("album_id"));
-                    info.put("upload_time", rs2.getString("download_time"));
-                    info.put("album_title", rs2.getString("album_title"));
-                    info.put("artist_id", rs2.getString("artist_id"));
-                    info.put("artist_name", rs2.getString("artist_name"));
+                    info.put("song_id", rs3.getString("song_id"));
+                    info.put("song_title", rs3.getString("song_title"));
+                    info.put("album_id", rs3.getString("album_id"));
+                    info.put("upload_time", rs3.getString("download_time"));
+                    info.put("album_title", rs3.getString("album_title"));
+                    info.put("artist_id", rs3.getString("artist_id"));
+                    info.put("artist_name", rs3.getString("artist_name"));
                     
                     downloadedSongData.add(info);
                 }
@@ -131,13 +131,13 @@ public class UserInfo extends HttpServlet {
                 songReviewData = new ArrayList<Map <String, String>>();
                 while(rs5.next()) {
                     Map<String, String> info = new HashMap<String, String>();
-                    info.put("song_id", rs4.getString("song_id"));
-                    info.put("song_title", rs4.getString("song_title"));
-                    info.put("album_id", rs4.getString("album_id"));
-                    info.put("album_title", rs4.getString("album_title"));
-                    info.put("artist_id", rs4.getString("artist_id"));
-                    info.put("artist_name", rs4.getString("artist_name"));
-                    info.put("song_review", rs4.getString("review"));
+                    info.put("song_id", rs5.getString("song_id"));
+                    info.put("song_title", rs5.getString("song_title"));
+                    info.put("album_id", rs5.getString("album_id"));
+                    info.put("album_title", rs5.getString("album_title"));
+                    info.put("artist_id", rs5.getString("artist_id"));
+                    info.put("artist_name", rs5.getString("artist_name"));
+                    info.put("song_review", rs5.getString("review"));
                     
                     songReviewData.add(info);
                 }
@@ -148,11 +148,11 @@ public class UserInfo extends HttpServlet {
                 albumRatingData = new ArrayList<Map <String, String>>();
                 while(rs6.next()) {
                     Map<String, String> info = new HashMap<String, String>();                   
-                    info.put("album_id", rs4.getString("album_id"));
-                    info.put("album_title", rs4.getString("album_title"));
-                    info.put("artist_id", rs4.getString("artist_id"));
-                    info.put("artist_name", rs4.getString("artist_name"));
-                    info.put("album_rating", rs4.getString("rating"));
+                    info.put("album_id", rs6.getString("album_id"));
+                    info.put("album_title", rs6.getString("album_title"));
+                    info.put("artist_id", rs6.getString("artist_id"));
+                    info.put("artist_name", rs6.getString("artist_name"));
+                    info.put("album_rating", rs6.getString("rating"));
                     
                     albumRatingData.add(info);
                 }
@@ -163,11 +163,11 @@ public class UserInfo extends HttpServlet {
                 albumReviewData = new ArrayList<Map <String, String>>();
                 while(rs7.next()) {
                     Map<String, String> info = new HashMap<String, String>();                   
-                    info.put("album_id", rs4.getString("album_id"));
-                    info.put("album_title", rs4.getString("album_title"));
-                    info.put("artist_id", rs4.getString("artist_id"));
-                    info.put("artist_name", rs4.getString("artist_name"));
-                    info.put("album_rating", rs4.getString("rating"));
+                    info.put("album_id", rs7.getString("album_id"));
+                    info.put("album_title", rs7.getString("album_title"));
+                    info.put("artist_id", rs7.getString("artist_id"));
+                    info.put("artist_name", rs7.getString("artist_name"));
+                    info.put("album_rating", rs7.getString("rating"));
                     
                     albumReviewData.add(info);
                 }
@@ -187,6 +187,7 @@ public class UserInfo extends HttpServlet {
             } 
             catch(Exception e) {
                 System.out.println("UserInfo Error: "+ e.getMessage());
+                e.printStackTrace();
             }
             finally {                 
                 try {

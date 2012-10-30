@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -99,6 +100,11 @@ public class NewAccount extends HttpServlet {
                 }
                 else{
                     insert(strUserName, strname, strPassword);
+                    
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", strUserName);
+                    response.sendRedirect("home.jsp");
+                    
                 }
             }
             catch(Exception e){

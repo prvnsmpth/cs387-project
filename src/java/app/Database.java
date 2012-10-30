@@ -92,11 +92,22 @@ public class Database {
         try {
             Statement s = con.createStatement();
             rs = s.executeQuery(query);  
-            System.out.println(query);
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }        
         return rs;
+    }
+    
+    public int update(String query)
+    {
+        int res = -1;
+        try {
+            Statement s = con.createStatement();
+            res = s.executeUpdate(query); 
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }   
+        return res;
     }
     
     public void closeConnection()
