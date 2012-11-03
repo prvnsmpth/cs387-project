@@ -26,7 +26,7 @@ public class RateAlbum extends HttpServlet {
    private static final String RATE_QUERY = "insert into album_rating values(?,?,?)";
    private static final String REVIEW_QUERY = "insert into album_review (`album_id`, `username`, `review`) values(?,?,?)";
    private static final String UPDATE_RATE_QUERY = "update album_rating set rating =? WHERE username=? and album_id=?";
-   private static final String UPDATE_REVIEW_QUERY = "insert into album_review review =? WHERE username=? and album_id=?";
+   private static final String UPDATE_REVIEW_QUERY = "update album_review set review =? WHERE username=? and album_id=?";
    private static final String CHECKIFREVIEWED_QUERY = "select album_id from album_review where username=? and album_id=?";
    private static final String CHECKIFRATED_QUERY = "select album_id, rating from album_rating where username=? and album_id=?";
 
@@ -101,6 +101,8 @@ public class RateAlbum extends HttpServlet {
                 int res = d.update("UPDATE album SET rating = " + rating + " WHERE album_id = " + album_id);
                 res = d.update("UPDATE album SET rating_count = rating_count + 1 WHERE album_id = " + album_id);
                 
+                out.println(rating);
+                
                 }
                 else{
                     ////overwrite the rating
@@ -120,6 +122,8 @@ public class RateAlbum extends HttpServlet {
                     }
                     rating = (rating * numRatings - oldRating + Integer.parseInt(rate)) / (numRatings);
                     int res = d.update("UPDATE album SET rating = " + rating + " WHERE album_id = " + album_id);
+                    
+                    out.println(rating);
                 }                            
                 
             

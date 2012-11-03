@@ -98,12 +98,31 @@ input[type="submit"]:active, input[type="button"]:active {
     color: #f00;
     font-size: 12px;
     margin: 5px;
-    position: absolute
+    position: absolute;
 }
 
 .allclear {
     color: #3c3;
     font-size: 12px;
     margin: 5px;
+    position: absolute
+}
+
+.star {
+    background: url("../img/star.png") repeat-x;
+    background-position: 0 -27px;
+    height: 13px; width: 70px;
+    cursor: pointer
+} 
+.starred {
+    background: url("../img/star.png") repeat-x;
+    background-position: 0 -68px;
+    height: 13px; width: 70px;
+    position: absolute
+}
+.permstar {
+    background: url("../img/star.png") repeat-x;
+    background-position: 0 -40px;
+    height: 13px; width: 70px;
     position: absolute
 }

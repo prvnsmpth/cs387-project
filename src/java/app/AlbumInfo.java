@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -114,6 +115,10 @@ public class AlbumInfo extends HttpServlet {
                     
                     songListing.add(songInfo);
                 }
+                
+                // put song count
+                albumInfo.put("song_count", Integer.toString(songListing.size()));
+                
                 PreparedStatement prepStmt3 = con.prepareStatement(ARTIST_QUERY);
                 prepStmt3.setString(1, Integer.toString(artist_id));
                 ResultSet rs3 = prepStmt3.executeQuery();
@@ -128,7 +133,10 @@ public class AlbumInfo extends HttpServlet {
                     Map<String, String> reviewInfo = new HashMap<String, String>();
                     reviewInfo.put("username", rs4.getString("username"));
                     reviewInfo.put("review", rs4.getString("review"));
-                    reviewInfo.put("time", rs4.getString("time"));
+                    Date dt = rs4.getTimestamp("time");
+                    SimpleDateFormat date = new SimpleDateFormat("d MMM yyyy 'at' h:mm a");                    
+                    String t = date.format(dt);
+                    reviewInfo.put("time", t);
                     reviews.add(reviewInfo);
                 }
                 

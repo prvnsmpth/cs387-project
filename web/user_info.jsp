@@ -12,6 +12,15 @@
     <head>
         <link rel="stylesheet" href="css/global.css" type="text/css" />    
         <link rel="stylesheet" href="css/layout.css" type="text/css" />    
+        <link rel="stylesheet" href="css/layout.css" type="text/css" /> 
+        
+        <!-- jquery -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Info</title>
         <style type="text/css">
@@ -23,9 +32,12 @@
             a:hover {
                 text-decoration: underline;
             }
+            
         </style>
     </head>
     <body>
+        <%@include file="navbar.html" %>
+        <div id="content-wrap">
         <%
             String userFullName = request.getAttribute("userFullName").toString();
             List<Map <String, String>> uploadedSongData = 
@@ -41,7 +53,10 @@
         <div class="section">
             <div class="sec_header">Uploaded Songs</div>
             <div class="sec_content">
-                <table width="100%"> 
+                <% 
+                        if (uploadedSongData.size() > 0) {                        
+                %>
+                <table width="100%" class="table table-striped"> 
                     <thead>
                         <tr>
                             <td>Title</td><td>Album</td><td>Artist</td>
@@ -55,9 +70,20 @@
                             <td>${song.artist_name}</td>
                         </tr>
                     </c:forEach>
+                            
+                    <%
+                        } else {
+                    %>
+                            <div style="margin: 0 auto; width: 100%; text-align: center; padding: 40px; font-size: 20px; font-weight: bold">
+                                No songs found.
+                            </div>
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
              </div>
+        </div>
         </div>
     </body>
 </html>

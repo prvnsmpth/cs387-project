@@ -104,6 +104,8 @@ public class RateSong extends HttpServlet {
                 int res = d.update("UPDATE song SET rating = " + rating + " WHERE song_id = " + song_id);
                 res = d.update("UPDATE song SET rating_count = rating_count + 1 WHERE song_id = " + song_id);
                 
+                out.println(rating);
+                
                 }
                 else{
                     ////overwrite the rating
@@ -123,6 +125,8 @@ public class RateSong extends HttpServlet {
                     }
                     rating = (rating * numRatings - oldRating + Integer.parseInt(rate)) / (numRatings);
                     int res = d.update("UPDATE song SET rating = " + rating + " WHERE song_id = " + song_id);
+                    
+                    out.println(rating);
                 }
             
             

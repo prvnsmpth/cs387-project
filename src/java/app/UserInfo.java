@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -54,7 +55,21 @@ public class UserInfo extends HttpServlet {
             Database d = new Database();
             d.connect();
             Connection con = null;
-            String strUsername = request.getParameter("username").toString();
+            Object userNameParam = request.getParameter("username");
+            HttpSession session = request.getSession();
+            Object username = session.getAttribute("username");
+            String strUsername = null;
+            if (username == null) {
+                response.sendRedirect("login.jsp");
+            }
+            
+            if (userNameParam == null) {
+                strUsername = username.toString();
+            } else {
+                strUsername = userNameParam.toString();
+            }
+                
+            
             String userFullName = null;  
             
             List<Map <String, String>> uploadedSongData;
@@ -167,7 +182,7 @@ public class UserInfo extends HttpServlet {
                     info.put("album_title", rs7.getString("album_title"));
                     info.put("artist_id", rs7.getString("artist_id"));
                     info.put("artist_name", rs7.getString("artist_name"));
-                    info.put("album_rating", rs7.getString("rating"));
+                    info.put("album_review", rs7.getString("review"));
                     
                     albumReviewData.add(info);
                 }

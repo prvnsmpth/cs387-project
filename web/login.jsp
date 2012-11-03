@@ -11,7 +11,7 @@
     
     Object user = session.getAttribute("username");
     if (user != null)
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("UserInfo");
 %>
 <!DOCTYPE html>
 <html>
